@@ -1,9 +1,9 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+title: "Peer Graded Assignment: Course Project 1"
+output: html_document
 ---
+
+The data is come from [Activity monitoring data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip).
 
 ## 0.Setting Work directory
 ```{r setwc, echo=FALSE}
@@ -11,8 +11,7 @@ setwd("E:/education/Rstudy/RepData_PeerAssessment1")
 ```
 Use setwd to indicate R to the folder of the dataset.
 
-## Loading and preprocessing the data
-
+## 1.Loading and preprocessing the data
 ```{r loaddata, echo=TRUE, cache=TRUE}
 rawdata<-read.csv("activity.csv", header=TRUE)
 str(rawdata)
@@ -21,8 +20,7 @@ str(rawdata$date)
 ```
 Load the raw dataset from csv file, and figure out that date column read as the factor. In order to make the analysis of the daily steps, conver the date column from factor to date.
 
-## What is mean total number of steps taken per day?
-
+## 2.Number of steps per day.
 
 ### 1).Calculate the total number of steps per day.
 ```{r stepsperday, echo=TRUE, cache=TRUE}
@@ -61,8 +59,7 @@ hist(dailysteps)
 summary(dailysteps)
 ```
 
-
-## What is the average daily activity pattern?
+## 3.The average daily activity pattern.
 
 ### 1).Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 ```{r invervalpattern, cache=TRUE}
@@ -92,8 +89,7 @@ plot(avgintsteps$interval,avgintsteps$steps,type="l",main="Time series plot of d
 subset(avgintsteps,steps==max(avgintsteps$steps))
 ```
 
-
-## Imputing missing values
+## 4.Imputing missing value
 
 ### 1).Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 ```{r countNA, cache=TRUE}
@@ -159,8 +155,7 @@ if (median(dailysteps)==median(newdailysteps)) print("The median daily steps of 
 ```
 The reason to make this kind of result is that I use the interval averaged steps to fill in the NAs, so make the steps of everyday increasing.
 
-
-## Are there differences in activity patterns between weekdays and weekends?
+## 5.Are there differences in activity patterns between weekdays and weekends?
 
 ### 1).Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 ```{r weekday, cache=TRUE}
@@ -207,7 +202,6 @@ avgintdays$days<-days
 ```
 
 Plot the time series plot by lattice package.If did not installed lattice package, can use following script in R to isntall it.
-```{r instlattice, eval=FALSE}
 install.packages("lattice")
 ```
 
@@ -220,4 +214,6 @@ xyplot(avg~intv|days,data=avgintdays,
        ylab = "Number of Steps",
        layout = c(1,2))
 ```
+
+
 
