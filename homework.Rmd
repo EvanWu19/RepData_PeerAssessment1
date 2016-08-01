@@ -202,6 +202,7 @@ avgintdays$days<-days
 ```
 
 Plot the time series plot by lattice package.If did not installed lattice package, can use following script in R to isntall it.
+```{r instlattice, eval=FALSE}
 install.packages("lattice")
 ```
 
